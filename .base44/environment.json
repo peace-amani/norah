@@ -1,0 +1,12 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    {
+      "name": "SESSION_ID",
+      "description": "WhatsApp session ID (must begin with 'WOLF-BOT:'). Required for the bot to connect to WhatsApp. Without it the web status page still renders but the bot stays offline.",
+      "requiredAtBoot": false
+    }
+  ]
+}
