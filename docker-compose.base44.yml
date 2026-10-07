@@ -1,0 +1,27 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.base44
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - node_modules:/app/node_modules
+      - bot_data:/app/data
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - BASE44_PUBLIC_HOST_SUFFIX=${BASE44_PUBLIC_HOST_SUFFIX}
+    env_file:
+      - ./.env.base44-defaults
+      - /run/base44/app.env
+    # Install deps (postinstall patches baileys shims), then run with nodemon so
+    # source edits restart the process. No live-reload dev server exists for this bot.
+    command: sh -c "npm install --no-audit --no-fund && npx nodemon --watch index.js --watch lib --watch settings.js --exec 'node --no-warnings --expose-gc --max-old-space-size=1024 --max-semi-space-size=64 --experimental-global-webcrypto index.js'"
+    restart: unless-stopped
+
+volumes:
+  node_modules:
+  bot_data:
