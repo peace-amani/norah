@@ -1,0 +1,12 @@
+FROM node:22-slim
+
+# Build tools for native modules (better-sqlite3, canvas, sharp) + ffmpeg for media commands
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    make \
+    g++ \
+    ffmpeg \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
