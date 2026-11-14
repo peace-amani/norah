@@ -1,0 +1,9 @@
+allowBuilds:
+  better-sqlite3: false
+  canvas: false
+  ffmpeg-static: false
+  protobufjs: false
+  sharp: false
+  wolfsocket: true
+minimumReleaseAgeExclude:
+  - wolfsocket@1.0.6
